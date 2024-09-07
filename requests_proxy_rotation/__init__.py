@@ -1,1 +1,1 @@
-import requests_proxy_rotation
+from requests_proxy_rotation.requests_proxy_rotation import RequestsWrapper
