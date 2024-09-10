@@ -17,8 +17,11 @@ class RequestsWrapper:
         self.proxylist= proxylist
         self.current_proxy = {}
         self.verify_endpoint = verify_endpoint
-        if requests.get(verify_endpoint).status_code != 200:
-            raise Exception("Verify endpoint is invalid: Not response 200")
+        try:
+            if requests.get(verify_endpoint).status_code != 200:
+                raise Exception("Verify endpoint is invalid: Not response 200")
+        except:
+            raise Exception("Verify endpoint is invalid: Request error")
         self.timeout = timeout
     
     def add_rotator(self,domain:str,limit_times: int):
@@ -50,11 +53,17 @@ class RequestsWrapper:
         while True:
             if count == len(self.proxylist):
                 raise Exception("There is no alive proxy")
-            if self.rotator_counter[domain] < self.rotator[domain] and requests.get(self.verify_endpoint, timeout=3, proxies=cur_pro).status_code == 200:
-                with lock:
-                    self.rotator_counter[domain] += 1
-                return cur_pro
-            else:
+            try:
+                if self.rotator_counter[domain] < self.rotator[domain] and requests.get(self.verify_endpoint, timeout=3, proxies=cur_pro).status_code == 200:
+                    with lock:
+                        self.rotator_counter[domain] += 1
+                    return cur_pro
+                else:
+                    self.current_proxy[domain] = (self.current_proxy[domain] + 1) % len(self.proxylist)
+                    self.rotator_counter[domain] = 0
+                    cur_pro = {"http":self.proxylist[self.current_proxy[domain]],"https":self.proxylist[self.current_proxy[domain]]}
+                    count += 1
+            except:
                 self.current_proxy[domain] = (self.current_proxy[domain] + 1) % len(self.proxylist)
                 self.rotator_counter[domain] = 0
                 cur_pro = {"http":self.proxylist[self.current_proxy[domain]],"https":self.proxylist[self.current_proxy[domain]]}
