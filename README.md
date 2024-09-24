@@ -2,9 +2,13 @@
 A wrapped version of requests. Help bypassing limitation of API by automatic rotating proxy.
 
 ## How to install
-`pip install requests_proxy_rotation`
+```bash
+pip install requests_proxy_rotation
+```
 or
-`pip install git+https://github.com/phan123123/requests_proxy_rotation`
+```bash
+pip install git+https://github.com/phan123123/requests_proxy_rotation
+```
 
 ## How to use
 ### Limit based mode
