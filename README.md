@@ -28,7 +28,7 @@ from requests_proxy_rotation import RequestsWrapper
 
 proxylist = ["socks5://123.123.123.123:8080","socks4://1.2.3.4:1234"]
 verify_endpoint = "http://example.com"
-requests = RequestsWrapper(proxylist=proxy_list,verify_endpoint=verify_endpoint, mode = RequestsWrapper.LIMIT_BASED)
+requests = RequestsWrapper(proxylist=proxy_list,verify_endpoint=verify_endpoint, mode = RequestsWrapper.TIME_BASED)
 
 requests.add_rotator("domain_01",limit_times = 5, time_rate=(2,RequestsWrapper.UNIT_MIN)) # domain_01 API with limit 5 times for each IP in 2 minutes.
 response = requests.get("http://domain_01/get_endpoint")
