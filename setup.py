@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='requests_proxy_rotation',
-    version='0.1.0',
+    name='requests-proxy-rotation',
+    version='1.0.0',
     author='phannt',
     author_email='phan123123@gmail.com',
-    description='A wrapped version of requests. Allow automatic rotate proxy with limit of each endpoint',
+    description='A wrapped version of requests. Help bypassing limitation of API by automatic rotating proxy',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='',
