@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='requests-proxy-rotation',
-    version='1.0.1',
+    version='1.1.0',
     author='phannt',
     author_email='phan123123@gmail.com',
     description='A wrapped version of requests. Help bypassing limitation of API by automatic rotating proxy',

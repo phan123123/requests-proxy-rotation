@@ -196,13 +196,21 @@ class RequestsWrapper:
                 index_tmp= (index_tmp + 1) % len(self.proxylist)
                 count += 1
 
-    def get(self, url, params=None, headers=None):
+    def get(self, url, *args, **kwargs):
         proxy = self._get_proxy(get_domain(url))
-        return requests.get(url,params=params,headers=headers,proxies=proxy,timeout=self.timeout)
+        if "proxies" in kwargs:
+            kwargs.pop('proxies')
+        if "timeout" in kwargs:
+            kwargs.pop('timeout')
+        return requests.get(url, proxies=proxy,timeout=self.timeout, *args, **kwargs)
 
-    def post(self, url, data=None, json=None, headers=None):
+    def post(self, url, *args, **kwargs):
         proxy = self._get_proxy(get_domain(url))
-        return requests.post(url, data=data, json=json, headers=headers,proxies=proxy,timeout=self.timeout)
+        if "proxies" in kwargs:
+            kwargs.pop('proxies')
+        if "timeout" in kwargs:
+            kwargs.pop('timeout')
+        return requests.post(url, proxies=proxy,timeout=self.timeout, *args, **kwargs)
     
     def request(self, method, url, *args, **kwargs):
         proxy = self._get_proxy(get_domain(url))

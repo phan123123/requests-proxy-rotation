@@ -18,7 +18,7 @@ log = logging.getLogger("LOG")
 class Test_limit_based(unittest.TestCase):
     def setUp(self):
         # Need setup proxy on 192,168,0.x first
-        proxy_list = ["socks5://192.168.0.100:30000","socks5://192.168.0.100:30001","socks5://192.168.0.100:30002"]
+        proxy_list = ["socks5h://f2w:Str0ngP4ss@86.239.2.8:5050","socks5h://f2w:Str0ngP4ss@202.14.116.111:5050","socks5h://f2w:Str0ngP4ss@84.16.74.171:5050"]
         self.rq = RequestsWrapper(proxylist=proxy_list,verify_endpoint="https://example.com/", mode = RequestsWrapper.LIMIT_BASED)
         
     def test_get_limit_based(self):
@@ -49,7 +49,7 @@ class Test_limit_based(unittest.TestCase):
 class Test_time_based(unittest.TestCase):
     def setUp(self):
         # Need setup proxy on 192,168,0.x first
-        proxy_list = ["socks5://192.168.0.100:30000","socks5://192.168.0.100:30001","socks5://192.168.0.100:30002"]
+        proxy_list = ["socks5h://f2w:Str0ngP4ss@27.35.231.2:5050","socks5h://f2w:Str0ngP4ss@125.129.81.103:5050","socks5h://f2w:Str0ngP4ss@86.239.2.8:5050"]
         self.rq = RequestsWrapper(proxylist=proxy_list,verify_endpoint="https://example.com/", mode = RequestsWrapper.TIME_BASED)
 
     def test_get_time_based(self):
